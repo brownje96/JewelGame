@@ -5,9 +5,13 @@ A match-three jewel game
 
 I was bored.
 
+## version?
+
+1.1
+
 ## there's bugs?
 
-there's bugs. Especially if you get an "L"s shaped match. I wrote it in 12 hours. It'll be fixed eventually.
+No software is perfect but there's none I'm aware of right now! File an issue if you find one!
 
 ## What can I do with this?
 

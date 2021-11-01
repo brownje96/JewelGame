@@ -1,3 +1,5 @@
+// normal dummy load
+
 private void dummyPopulate() {
     board[0] = new Jewel[] { new Amethyst(), new Amethyst(), new Amethyst(), new Diamond(), new Amethyst(), new Emerald(), new Diamond(), new Topaz() };
     board[1] = new Jewel[] { new Topaz(), new Emerald(), new Emerald(), new Emerald(), new Emerald(), new Diamond(), new Emerald(), new Amethyst() };
@@ -6,5 +8,18 @@ private void dummyPopulate() {
     board[4] = new Jewel[] { new Amethyst(), new Amethyst(), new Amethyst(), new Diamond(), new Amethyst(), new Emerald(), new Diamond(), new Topaz() };
     board[5] = new Jewel[] { new Topaz(), new Emerald(), new Emerald(), new Emerald(), new Emerald(), new Diamond(), new Emerald(), new Amethyst() };
     board[6] = new Jewel[] { new Emerald(), new Diamond(), new Topaz(), new Amethyst(), new Ruby(), new Sapphire(), new Emerald(), new Emerald()};
+    board[7] = new Jewel[] { new Diamond(), new Sapphire(), new Sapphire(), new Diamond(), new Topaz(), new Amethyst(), new Emerald(), new Ruby() };
+}
+
+// L-shape dummy load
+
+private void dummyPopulate() {
+    board[0] = new Jewel[] { new Amethyst(), new Amethyst(), new Emerald(), new Diamond(), new Amethyst(), new Emerald(), new Diamond(), new Topaz() };
+    board[1] = new Jewel[] { new Topaz(), new Diamond(), new Emerald(), new Topaz(), new Ruby(), new Diamond(), new Emerald(), new Amethyst() };
+    board[2] = new Jewel[] { new Emerald(), new Emerald(), new Topaz(), new Emerald(), new Ruby(), new Sapphire(), new Emerald(), new Emerald()};
+    board[3] = new Jewel[] { new Diamond(), new Sapphire(), new Sapphire(), new Diamond(), new Topaz(), new Amethyst(), new Emerald(), new Ruby() };
+    board[4] = new Jewel[] { new Amethyst(), new Diamond(), new Amethyst(), new Diamond(), new Amethyst(), new Emerald(), new Diamond(), new Topaz() };
+    board[5] = new Jewel[] { new Topaz(), new Emerald(), new Ruby(), new Emerald(), new Emerald(), new Diamond(), new Emerald(), new Amethyst() };
+    board[6] = new Jewel[] { new Emerald(), new Diamond(), new Topaz(), new Amethyst(), new Ruby(), new Sapphire(), new Diamond(), new Emerald()};
     board[7] = new Jewel[] { new Diamond(), new Sapphire(), new Sapphire(), new Diamond(), new Topaz(), new Amethyst(), new Emerald(), new Ruby() };
 }

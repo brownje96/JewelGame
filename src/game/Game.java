@@ -170,7 +170,7 @@ public class Game {
         score += list.length * 100;
         for(Jewel jewel : list) {
             int[] coordinate = getCoordinatesOf(jewel);
-            board[coordinate[0]][coordinate[1]] = null;
+            if(!((coordinate[0] == -1)&&(coordinate[1] == -1))) board[coordinate[0]][coordinate[1]] = null;
         }
     }
 
@@ -210,13 +210,27 @@ public class Game {
     public static Jewel getRandomJewel() {
         Jewel x = null;
         switch(Global.rng.nextInt(6)) {
-            case 0 -> x= new Diamond();
-            case 1 -> x= new Amethyst();
-            case 2 -> x= new Emerald();
-            case 3 -> x= new Ruby();
-            case 4 -> x= new Sapphire();
-            case 5 -> x= new Topaz();
-            default -> System.err.println("invalid gemstone added. This should never happen.");
+            case 0:
+                x= new Diamond();
+                break;
+            case 1:
+                x= new Amethyst();
+                break;
+            case 2:
+                x= new Emerald();
+                break;
+            case 3:
+                x= new Ruby();
+                break;
+            case 4:
+                x= new Sapphire();
+                break;
+            case 5:
+                x= new Topaz();
+                break;
+            default:
+                System.err.println("invalid gemstone added. This should never happen.");
+                break;
         }
         return x;
     }

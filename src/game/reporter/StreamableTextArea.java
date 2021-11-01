@@ -1,7 +1,6 @@
 package game.reporter;
 
 import java.awt.*;
-import java.io.IOException;
 import java.io.OutputStream;
 
 import javax.swing.JTextPane;
@@ -29,7 +28,7 @@ public class StreamableTextArea
 
             final StyledDocument d = getStyledDocument();
 
-            @Override public void write(int arg0) throws IOException {
+            @Override public void write(int arg0) {
                 try {
                     d.insertString(
                         d.getLength(),

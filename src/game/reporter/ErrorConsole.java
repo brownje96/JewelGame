@@ -11,7 +11,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 
-// old code from 2016, slighly modified.
+// old code from 2016, slightly modified.
 public class ErrorConsole
         extends JFrame {
 
@@ -32,29 +32,20 @@ public class ErrorConsole
         add(new JLabel(new ImageIcon(ErrorConsole.class.getResource("SLEEPLESS_DEV.gif"))), BorderLayout.WEST);
         add(new JScrollPane(sta), BorderLayout.CENTER);
         add(buttonPanel, BorderLayout.SOUTH);
-
         sta.getStyledDocument().addDocumentListener(new DocumentListener() {
-            @Override
-            public void insertUpdate(DocumentEvent e) {
+            @Override public void insertUpdate(DocumentEvent e) {
                 Global.mainWindow.setEnabled(false);
                 setVisible(true);
             }
 
-            @Override
-            public void removeUpdate(DocumentEvent e) {
-
-            }
-
-            @Override
-            public void changedUpdate(DocumentEvent e) {
-
-            }
+            //ignored
+            @Override public void removeUpdate(DocumentEvent e) {}
+            @Override public void changedUpdate(DocumentEvent e) {}
         });
-
         revalidate();
     }
 
-    public static String readEntireFileAsStr(InputStream f) {
+    private static String readEntireFileAsStr(InputStream f) {
         StringBuilder x = new StringBuilder();
         try (BufferedReader br = new BufferedReader(new InputStreamReader(f))) {
             String s;
