@@ -7,6 +7,9 @@ import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
+/**
+ * This is the base class for all Jewels.
+ */
 public class Jewel
     extends JComponent
     implements MouseListener {
@@ -36,8 +39,7 @@ public class Jewel
             ((Graphics2D) g).setStroke(stroke);
             g.drawOval(0,0,getWidth(),getHeight());
         }
-        // todo: I am super unsure of the safety of this call.
-        getParent().repaint();
+        getParent().repaint(); // todo: I am super unsure of the safety of this call.
     }
 
     // sealed... for now.

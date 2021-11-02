@@ -5,6 +5,9 @@ import game.reporter.ErrorConsole;
 import java.awt.image.BufferedImage;
 import java.util.Random;
 
+/**
+ * This class contains all objects needed program-wide by the game.
+ */
 public class Global {
     public static final Random rng = new Random();
     public static Game currentGame;

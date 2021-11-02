@@ -1,15 +1,12 @@
 package game.reporter;
 
 import game.Global;
+import game.Utility;
 
 import javax.swing.*;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 import java.awt.*;
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
 
 // old code from 2016, slightly modified.
 public class ErrorConsole
@@ -28,7 +25,7 @@ public class ErrorConsole
         buttonPanel.add(okBtn);
         okBtn.addActionListener(l -> System.exit(-1));
 
-        add(new JLabel(readEntireFileAsStr(ErrorConsole.class.getResourceAsStream("bug.html"))), BorderLayout.NORTH);
+        add(new JLabel(Utility.readEntireFileAsStr(ErrorConsole.class.getResourceAsStream("bug.html"))), BorderLayout.NORTH);
         add(new JLabel(new ImageIcon(ErrorConsole.class.getResource("SLEEPLESS_DEV.gif"))), BorderLayout.WEST);
         add(new JScrollPane(sta), BorderLayout.CENTER);
         add(buttonPanel, BorderLayout.SOUTH);
@@ -43,15 +40,6 @@ public class ErrorConsole
             @Override public void changedUpdate(DocumentEvent e) {}
         });
         revalidate();
-    }
-
-    private static String readEntireFileAsStr(InputStream f) {
-        StringBuilder x = new StringBuilder();
-        try (BufferedReader br = new BufferedReader(new InputStreamReader(f))) {
-            String s;
-            while((s = br.readLine())!=null) x.append(s);
-        } catch (IOException ex) { ex.printStackTrace(System.err); }
-        return x.toString();
     }
 
     public final StreamableTextArea sta = new StreamableTextArea();

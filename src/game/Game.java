@@ -1,44 +1,77 @@
 package game;
 
-import game.jewels.*;
 import java.awt.*;
 import java.util.ArrayList;
 
+import game.jewels.*;
+
+/**
+ * This class contains the logic for the game.
+ */
 public class Game {
     // attributes
     private final Dimension gameSize;
-    private final Jewel[][] board = new Jewel[8][8];
+    private final Jewel[][] board;
 
     private int score = 0;
 
     // constructor
+
+    /**
+     * Creates a new Game
+     *
+     * @param x the width of the board
+     * @param y the height of the board.
+     */
     public Game(int x, int y) {
         gameSize = new Dimension(x,y);
+        board = new Jewel[x][y];
         populate();
         onChange();
     }
 
     // game info
 
+    /**
+     * Gets the size of the board/play-field
+     *
+     * @return a Dimension object containing the size of the board.
+     */
     public Dimension getGameSize() { return gameSize; }
 
+    /**
+     * Returns the board; a two-dimensional array of Jewel.
+     *
+     * @return the board.
+     */
     public Jewel[][] getBoard() {
         return board;
     }
 
+    /**
+     * Gets the score earned during this game.
+     *
+     * @return the score
+     */
     public int getScore() { return score; }
 
     // Game Logic
 
+    /**
+     * Called when a change is made on the board.
+     */
     public void onChange() {
         checkSelected();
         do {
             doGravity();
             populate();
         } while (checkForMatches(false));
-        if(Global.mainWindow != null) Global.mainWindow.updateBoard();
+        if((Global.mainWindow != null) && (Global.mainWindow.getGame() != null)) Global.mainWindow.updateBoard();
     }
 
+    /**
+     * Gravitates all floating jewels "down" to "Earth".
+     */
     public void doGravity() {
         int[] lastEmpty = new int[2];
         boolean foundEmpty = false;
@@ -62,6 +95,9 @@ public class Game {
         }
     }
 
+    /**
+     * Ensures that jewel selections are within the rules, and swaps them if they are.
+     */
     private void checkSelected() {
         Jewel[] selected = getSelectedJewels();
         int selectedCount = selected.length;
@@ -83,6 +119,12 @@ public class Game {
         }
     }
 
+    /**
+     * Finds matches on the board, then removes them.
+     *
+     * @param removed should always be called with the value 'false', used to determine if during any recursion, any removals have occurred
+     * @return returns the result of the parameter removed.
+     */
     private boolean checkForMatches(boolean removed) {
         boolean recurse = false;
         Jewel[] x = checkX();
@@ -102,6 +144,11 @@ public class Game {
         return removed;
     }
 
+    /**
+     * Finds 3+ matches in the horizontal orientation
+     *
+     * @return an array of jewels
+     */
     private Jewel[] checkX() {
         ArrayList<Jewel> toRemove = new ArrayList<>();
         String type = null;
@@ -129,6 +176,11 @@ public class Game {
         return toRemove.toArray(new Jewel[toRemove.size()]);
     }
 
+    /**
+     * Finds 3+ matches in the vertical orientation
+     *
+     * @return an array of jewels
+     */
     public Jewel[] checkY() {
         ArrayList<Jewel> toRemove = new ArrayList<>();
         String type = null;
@@ -156,6 +208,9 @@ public class Game {
         return toRemove.toArray(new Jewel[toRemove.size()]);
     }
 
+    /**
+     * Adds in new jewels for any spot on the board which is empty.
+     */
     private void populate() {
         for(int x = 0; x < gameSize.width; x++) {
             for(int y = 0; y < gameSize.height; y++) {
@@ -166,6 +221,11 @@ public class Game {
 
     // Utility
 
+    /**
+     * Removes a given set of jewels from the board
+     *
+     * @param list an array of jewels.
+     */
     private void removeJewels(Jewel[] list) {
         score += list.length * 100;
         for(Jewel jewel : list) {
@@ -174,23 +234,38 @@ public class Game {
         }
     }
 
+    /**
+     * Swaps the position of two jewels on the board.
+     *
+     * @param a first jewel to be swapped
+     * @param b second jewel to be swapped
+     */
     private void swap(Jewel a, Jewel b) {
         int[] Jewel_A_Coordinates = getCoordinatesOf(a), Jewel_B_Coordinates = getCoordinatesOf(b);
         board[Jewel_A_Coordinates[0]][Jewel_A_Coordinates[1]] = b;
         board[Jewel_B_Coordinates[0]][Jewel_B_Coordinates[1]] = a;
     }
 
+    /**
+     * Finds the coordinates of a jewel on the board
+     *
+     * @param j the jewel object
+     * @return an array of int containing the coordinates, or (-1, -1) if it is not found on the board.
+     */
     private int[] getCoordinatesOf(Jewel j) {
         for(int x = 0; x < gameSize.width; x++) {
             for(int y = 0; y < gameSize.height; y++) {
-                if(board[x][y] == j) {
-                    return new int[] { x, y };
-                }
+                if(board[x][y] == j) return new int[] { x, y };
             }
         }
         return new int[] {-1, -1};
     }
 
+    /**
+     * Gets an array of all Jewels where the selected flag is true.
+     *
+     * @return an array of game.jewels.Jewel
+     */
     private Jewel[] getSelectedJewels() {
         ArrayList<Jewel> selected = new ArrayList<>();
         for(int x = 0; x < gameSize.width; x++) {
@@ -201,12 +276,20 @@ public class Game {
         return selected.toArray(new Jewel[selected.size()]);
     }
 
+    /**
+     * Sets the "selected" flag back to false for all jewels on the board
+     */
     private void deSelectAllJewels() {
         for(int x = 0; x < gameSize.width; x++)
             for(int y = 0; y < gameSize.height; y++)
                 board[x][y].setSelected(false);
     }
 
+    /**
+     * Gets a random jewel. Presumably to be added to the board.
+     *
+     * @return a subclass of game.jewels.Jewel
+     */
     public static Jewel getRandomJewel() {
         Jewel x = null;
         switch(Global.rng.nextInt(6)) {
