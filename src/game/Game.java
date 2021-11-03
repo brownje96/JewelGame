@@ -25,7 +25,7 @@ public class Game {
      */
     public Game(int x, int y) {
         gameSize = new Dimension(x,y);
-        board = new Jewel[x][y];
+        board = new Jewel[y][x];
         populate();
         onChange();
     }
@@ -103,8 +103,8 @@ public class Game {
         int selectedCount = selected.length;
         if(selectedCount <= 2) {
             if(selectedCount == 2) {
-                int deltaX = Math.abs(getCoordinatesOf(selected[0])[0] - getCoordinatesOf(selected[1])[0]);
-                int deltaY = Math.abs(getCoordinatesOf(selected[0])[1] - getCoordinatesOf(selected[1])[1]);
+                int deltaX = Math.abs(getCoordinatesOf(selected[0])[1] - getCoordinatesOf(selected[1])[1]);
+                int deltaY = Math.abs(getCoordinatesOf(selected[0])[0] - getCoordinatesOf(selected[1])[0]);
                 if((deltaX + deltaY) > 1) deSelectAllJewels();  // too far away or diagonal swap requested
                 else if ((deltaX + deltaY) == 1) {  // legal
                     swap(selected[0], selected[1]); // temporarily swap the two jewels
@@ -152,19 +152,19 @@ public class Game {
     private Jewel[] checkX() {
         ArrayList<Jewel> toRemove = new ArrayList<>();
         String type = null;
-        for(int x = 0; x < gameSize.width; x++) {
-            for(int y = 0; y < gameSize.height; y++) {
-                if(board[x][y] == null) continue;
+        for(int y = 0; y < gameSize.height; y++) {
+            for(int x = 0; x < gameSize.width; x++) {
+                if(board[y][x] == null) continue;
                 if(type == null) {
-                    type = board[x][y].toString();
-                    toRemove.add(board[x][y]);
+                    type = board[y][x].toString();
+                    toRemove.add(board[y][x]);
                 } else {
-                    if(type.equals(board[x][y].toString())) toRemove.add(board[x][y]);
+                    if(type.equals(board[y][x].toString())) toRemove.add(board[y][x]);
                     else {
                         if(toRemove.size() < 3) {
                             toRemove.clear();
                             type = null;
-                            y--;
+                            x--;
                         } else break;
                     }
                 }
@@ -184,19 +184,19 @@ public class Game {
     public Jewel[] checkY() {
         ArrayList<Jewel> toRemove = new ArrayList<>();
         String type = null;
-        for(int y = 0; y < gameSize.height; y++) {
-            for(int x = 0; x < gameSize.width; x++) {
-                if(board[x][y] == null) continue;
+        for(int x = 0; x < gameSize.width; x++) {
+            for(int y = 0; y < gameSize.height; y++) {
+                if(board[y][x] == null) continue;
                 if(type == null) {
-                    type = board[x][y].toString();
-                    toRemove.add(board[x][y]);
+                    type = board[y][x].toString();
+                    toRemove.add(board[y][x]);
                 } else {
-                    if(type.equals(board[x][y].toString())) toRemove.add(board[x][y]);
+                    if(type.equals(board[y][x].toString())) toRemove.add(board[y][x]);
                     else {
                         if(toRemove.size() < 3) {
                             toRemove.clear();
                             type = null;
-                            x--;
+                            y--;
                         } else break;
                     }
                 }
@@ -212,9 +212,9 @@ public class Game {
      * Adds in new jewels for any spot on the board which is empty.
      */
     private void populate() {
-        for(int x = 0; x < gameSize.width; x++) {
-            for(int y = 0; y < gameSize.height; y++) {
-                if(board[x][y] == null) board[x][y] = getRandomJewel();
+        for(int y = 0; y < gameSize.height; y++) {
+            for(int x = 0; x < gameSize.width; x++) {
+                if(board[y][x] == null) board[y][x] = getRandomJewel();
             }
         }
     }
@@ -253,9 +253,9 @@ public class Game {
      * @return an array of int containing the coordinates, or (-1, -1) if it is not found on the board.
      */
     private int[] getCoordinatesOf(Jewel j) {
-        for(int x = 0; x < gameSize.width; x++) {
-            for(int y = 0; y < gameSize.height; y++) {
-                if(board[x][y] == j) return new int[] { x, y };
+        for(int y = 0; y < gameSize.height; y++) {
+            for(int x = 0; x < gameSize.width; x++) {
+                if(board[y][x] == j) return new int[] { y, x };
             }
         }
         return new int[] {-1, -1};
@@ -268,9 +268,9 @@ public class Game {
      */
     private Jewel[] getSelectedJewels() {
         ArrayList<Jewel> selected = new ArrayList<>();
-        for(int x = 0; x < gameSize.width; x++) {
-            for(int y = 0; y < gameSize.height; y++) {
-                if(board[x][y].isSelected()) selected.add(board[x][y]);
+        for(int y = 0; y < gameSize.height; y++) {
+            for(int x = 0; x < gameSize.width; x++) {
+                if(board[y][x].isSelected()) selected.add(board[y][x]);
             }
         }
         return selected.toArray(new Jewel[selected.size()]);
@@ -280,9 +280,9 @@ public class Game {
      * Sets the "selected" flag back to false for all jewels on the board
      */
     private void deSelectAllJewels() {
-        for(int x = 0; x < gameSize.width; x++)
-            for(int y = 0; y < gameSize.height; y++)
-                board[x][y].setSelected(false);
+        for(int y = 0; y < gameSize.height; y++)
+            for(int x = 0; x < gameSize.width; x++)
+                board[y][x].setSelected(false);
     }
 
     /**

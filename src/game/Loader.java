@@ -21,7 +21,7 @@ public class Loader {
      * @param args command line arguments.
      */
     public static void main(String[] args) {
-        System.setProperty("apple.awt.application.name", Metadata.APP_NAME);
+        doPlatformSpecificOperations();
         boolean hasGfx = !GraphicsEnvironment.getLocalGraphicsEnvironment().isHeadlessInstance();
         if(hasGfx) {
             //todo: size customization?
@@ -29,7 +29,7 @@ public class Loader {
                 SwingUtilities.invokeAndWait(() -> {
                     Global.console = new ErrorConsole();
                     System.setErr(new PrintStream(Global.console.sta.getInputStream(Color.RED)));
-                    loadResources();
+                    Global.loadResources();
                     Global.mainWindow = new Window();
                     Global.mainWindow.setVisible(true);
                 });
@@ -40,15 +40,18 @@ public class Loader {
         } else System.err.println("This JVM is 'headless' and does not have graphics support. Cannot continue.");
     }
 
-    private static void loadResources() {
-        BufferedImage sheet;
-        try {
-            sheet = ImageIO.read(Loader.class.getResourceAsStream("/sheet.png"));
-        } catch (IOException e) {
-            System.err.println("Could not load sprite sheet. Quitting.");
-            e.printStackTrace();
-            return;
+    /**
+     * Performs operations that are platform specific.
+     *
+     * with credit to:
+     * https://stackoverflow.com/questions/22604218/set-a-dynamic-apple-menu-title-for-java-program-in-netbeans-7-4
+     */
+    public static void doPlatformSpecificOperations() {
+        String osName = System.getProperty("os.name").toLowerCase();
+        if(osName.contains("mac")) {
+            System.setProperty("apple.awt.application.name", Metadata.APP_NAME);
+            System.setProperty("apple.laf.useScreenMenuBar", "true");
+            System.setProperty("apple.awt.fileDialogForDirectories", "true");
         }
-        for(int i = 0; i < Global.sprites.length; i++) Global.sprites[i] = sheet.getSubimage(32 * i, 0, 32, 32);
     }
 }

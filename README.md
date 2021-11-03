@@ -7,13 +7,13 @@ I was bored and figured "hey I can do that", similar to other projects I underta
 
 ## version?
 
-1.2
+1.2.1
 
 ## Requirements?
 targets Java 1.8.
 
 ## Known Bugs
-- crash when a board is not a perfect mathematical square in dimensions.
+None known in this release :)
 
 ## What can I do with this?
 

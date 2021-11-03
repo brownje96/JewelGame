@@ -67,7 +67,7 @@ public class Window
                 panel.add(new JLabel("Y: "));
                 panel.add(y);
                 JOptionPane.showMessageDialog(Global.mainWindow, panel, "Define Size", JOptionPane.QUESTION_MESSAGE);
-                Global.currentGame = new Game((Integer) y.getValue(), (Integer) x.getValue());
+                Global.currentGame = new Game((Integer) x.getValue(), (Integer) y.getValue());
                 updateGame(Global.currentGame);
             }
         });
@@ -115,7 +115,7 @@ public class Window
 
     public void updateGame(Game x) {
         myGame = x;
-        setLayout(new GridLayout(myGame.getGameSize().width, myGame.getGameSize().height));
+        setLayout(new GridLayout(myGame.getGameSize().height, myGame.getGameSize().width));
         updateBoard();
     }
 
@@ -124,10 +124,10 @@ public class Window
         getContentPane().removeAll();
         getContentPane().repaint();
         Jewel[][] board = myGame.getBoard();
-        for(int x = 0; x < myGame.getGameSize().width; x++) {
-            for(int y = 0; y < myGame.getGameSize().height; y++) {
-                if(board[x][y] == null) add(new Dummy());   // should only happen in the IDE.
-                else add(board[x][y]);
+        for(int y = 0; y < myGame.getGameSize().height; y++) {
+            for(int x = 0; x < myGame.getGameSize().width; x++) {
+                if(board[y][x] == null) add(new Dummy());   // should only happen in the IDE.
+                else add(board[y][x]);
             }
         }
         revalidate();
