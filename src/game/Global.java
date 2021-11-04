@@ -1,6 +1,7 @@
 package game;
 
-import game.reporter.ErrorConsole;
+import game.ui.windows.ErrorConsole;
+import game.ui.windows.Window;
 
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
@@ -13,7 +14,7 @@ import java.util.Random;
 public class Global {
     // global objects
     public static final Random rng = new Random();
-    public static Game currentGame;
+    public static Board currentBoard;
 
     // windows
     public static Window mainWindow;

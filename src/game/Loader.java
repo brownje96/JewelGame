@@ -1,15 +1,13 @@
 package game;
 
-import game.meta.Metadata;
-import game.reporter.ErrorConsole;
-
-import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
-import java.awt.image.BufferedImage;
-import java.io.IOException;
 import java.io.PrintStream;
 import java.lang.reflect.InvocationTargetException;
+
+import game.meta.Metadata;
+import game.ui.windows.ErrorConsole;
+import game.ui.windows.Window;
 
 /**
  * This class initializes the game and loads all resources.
@@ -24,7 +22,6 @@ public class Loader {
         doPlatformSpecificOperations();
         boolean hasGfx = !GraphicsEnvironment.getLocalGraphicsEnvironment().isHeadlessInstance();
         if(hasGfx) {
-            //todo: size customization?
             try {
                 SwingUtilities.invokeAndWait(() -> {
                     Global.console = new ErrorConsole();

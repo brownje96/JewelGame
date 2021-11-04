@@ -1,7 +1,8 @@
-package game.reporter;
+package game.ui.windows;
 
 import game.Global;
 import game.Utility;
+import game.reporter.StreamableTextArea;
 
 import javax.swing.*;
 import javax.swing.event.DocumentEvent;
@@ -25,8 +26,8 @@ public class ErrorConsole
         buttonPanel.add(okBtn);
         okBtn.addActionListener(l -> System.exit(-1));
 
-        add(new JLabel(Utility.readEntireFileAsStr(ErrorConsole.class.getResourceAsStream("bug.html"))), BorderLayout.NORTH);
-        add(new JLabel(new ImageIcon(ErrorConsole.class.getResource("SLEEPLESS_DEV.gif"))), BorderLayout.WEST);
+        add(new JLabel(Utility.readEntireFileAsStr(ErrorConsole.class.getResourceAsStream("/game/reporter/bug.html"))), BorderLayout.NORTH);
+        add(new JLabel(new ImageIcon(ErrorConsole.class.getResource("/game/reporter/SLEEPLESS_DEV.gif"))), BorderLayout.WEST);
         add(new JScrollPane(sta), BorderLayout.CENTER);
         add(buttonPanel, BorderLayout.SOUTH);
         sta.getStyledDocument().addDocumentListener(new DocumentListener() {

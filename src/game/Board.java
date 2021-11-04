@@ -8,7 +8,7 @@ import game.jewels.*;
 /**
  * This class contains the logic for the game.
  */
-public class Game {
+public class Board {
     // attributes
     private final Dimension gameSize;
     private final Jewel[][] board;
@@ -23,7 +23,7 @@ public class Game {
      * @param x the width of the board
      * @param y the height of the board.
      */
-    public Game(int x, int y) {
+    public Board(int x, int y) {
         gameSize = new Dimension(x,y);
         board = new Jewel[y][x];
         populate();
@@ -44,7 +44,7 @@ public class Game {
      *
      * @return the board.
      */
-    public Jewel[][] getBoard() {
+    public Jewel[][] getArray() {
         return board;
     }
 
@@ -279,7 +279,7 @@ public class Game {
     /**
      * Sets the "selected" flag back to false for all jewels on the board
      */
-    private void deSelectAllJewels() {
+    public void deSelectAllJewels() {
         for(int y = 0; y < gameSize.height; y++)
             for(int x = 0; x < gameSize.width; x++)
                 board[y][x].setSelected(false);

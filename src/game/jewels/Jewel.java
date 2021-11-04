@@ -44,8 +44,11 @@ public class Jewel
 
     // sealed... for now.
     @Override public final void mouseClicked(MouseEvent e) {
-        selected = !selected;
-        Global.currentGame.onChange();
+        // quick hack...
+        if(isEnabled()) {
+            selected = !selected;
+            Global.currentBoard.onChange();
+        }
     }
 
     // ignored

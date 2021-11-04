@@ -6,6 +6,7 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 
 public final class Utility {
+
     public static String readEntireFileAsStr(InputStream f) {
         StringBuilder x = new StringBuilder();
         try (BufferedReader br = new BufferedReader(new InputStreamReader(f))) {
@@ -13,5 +14,10 @@ public final class Utility {
             while((s = br.readLine())!=null) x.append(s);
         } catch (IOException ex) { ex.printStackTrace(System.err); }
         return x.toString();
+    }
+
+    public static void waitSeconds(int seconds) {
+        try { Thread.sleep(seconds * 1000L);
+        } catch (InterruptedException e) { e.printStackTrace(); }
     }
 }

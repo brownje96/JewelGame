@@ -7,13 +7,13 @@ I was bored and figured "hey I can do that", similar to other projects I underta
 
 ## version?
 
-1.2.1
+1.3
 
 ## Requirements?
 targets Java 1.8.
 
 ## Known Bugs
-None known in this release :)
+1. Multiple threads for the timer bar may be activated.
 
 ## What can I do with this?
 
