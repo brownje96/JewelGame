@@ -20,7 +20,9 @@ public class PlayTimer
         bar.setValue(100);
         // timing
         while(remainingTime > 0) {
-            Utility.waitSeconds(1);
+            try { Thread.sleep(1000);
+            } catch (InterruptedException e) { return; }
+            System.out.println("Tick from " + hashCode());
             remainingTime--;
             bar.setValue((int) ((((double) remainingTime) / ((double)initialTime)) * 100));
             bar.setString(Integer.toString(remainingTime)); //todo: time formatting
