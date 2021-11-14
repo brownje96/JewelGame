@@ -13,7 +13,7 @@ I was bored and figured "hey I can do that", similar to other projects I underta
 targets Java 1.8.
 
 ## Known Bugs
-1. Multiple threads for the timer bar may be activated.
+None known in this release.
 
 ## What can I do with this?
 
