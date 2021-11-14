@@ -12,8 +12,8 @@ public class Board {
     // attributes
     private final Dimension gameSize;
     private final Jewel[][] board;
-
     private int score = 0;
+    private boolean paused = false;
 
     // constructor
 
@@ -54,6 +54,21 @@ public class Board {
      * @return the score
      */
     public int getScore() { return score; }
+
+    /**
+     * Sets the game's paused state.
+     * @param paused the new value for paused
+     */
+    public void setPaused(boolean paused) { this.paused = paused; }
+
+    /**
+     * Gets if the game is paused or not
+     *
+     * @return true if the game is paused.
+     */
+    public boolean isPaused() {
+        return paused;
+    }
 
     // Game Logic
 

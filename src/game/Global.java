@@ -6,6 +6,7 @@ import game.ui.windows.Window;
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
+import java.util.Objects;
 import java.util.Random;
 
 /**
@@ -27,7 +28,7 @@ public class Global {
     public static void loadResources() {
         BufferedImage sheet;
         try {
-            sheet = ImageIO.read(Global.class.getResourceAsStream("/sheet.png"));
+            sheet = ImageIO.read(Objects.requireNonNull(Global.class.getResourceAsStream("/sheet.png")));
         } catch (IOException e) {
             System.err.println("Could not load sprite sheet. Quitting.");
             e.printStackTrace();

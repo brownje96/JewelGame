@@ -8,6 +8,7 @@ import javax.swing.*;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 import java.awt.*;
+import java.util.Objects;
 
 // old code from 2016, slightly modified.
 public class ErrorConsole
@@ -27,7 +28,7 @@ public class ErrorConsole
         okBtn.addActionListener(l -> System.exit(-1));
 
         add(new JLabel(Utility.readEntireFileAsStr(ErrorConsole.class.getResourceAsStream("/game/reporter/bug.html"))), BorderLayout.NORTH);
-        add(new JLabel(new ImageIcon(ErrorConsole.class.getResource("/game/reporter/SLEEPLESS_DEV.gif"))), BorderLayout.WEST);
+        add(new JLabel(new ImageIcon(Objects.requireNonNull(ErrorConsole.class.getResource("/game/reporter/SLEEPLESS_DEV.gif")))), BorderLayout.WEST);
         add(new JScrollPane(sta), BorderLayout.CENTER);
         add(buttonPanel, BorderLayout.SOUTH);
         sta.getStyledDocument().addDocumentListener(new DocumentListener() {

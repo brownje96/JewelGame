@@ -13,15 +13,18 @@ public final class GameConfigurator
     extends JPanel
     implements ActionListener {
 
-    SpinnerNumberModel  snmX = new SpinnerNumberModel(8, 4, 100, 1),
-                        snmY = new SpinnerNumberModel(8, 4, 100, 1),
-                        snmT = new SpinnerNumberModel(60, 30, 600, 15);
+    final SpinnerNumberModel    snmX = new SpinnerNumberModel(8, 4, 100, 1);
+    final SpinnerNumberModel    snmY = new SpinnerNumberModel(8, 4, 100, 1);
+    final SpinnerNumberModel    snmT = new SpinnerNumberModel(60, 30, 600, 15);
 
-    JSpinner x = new JSpinner(snmX), y = new JSpinner(snmY), t = new JSpinner(snmT);
+    final JSpinner              x = new JSpinner(snmX);
+    final JSpinner              y = new JSpinner(snmY);
+    final JSpinner              t = new JSpinner(snmT);
 
-    ButtonGroup gameModeSelectionGroup = new ButtonGroup();
+    final ButtonGroup           gameModeSelectionGroup = new ButtonGroup();
 
-    JRadioButton endlessOption = new JRadioButton("Endless"), timedOption = new JRadioButton("Timed");
+    final JRadioButton          endlessOption = new JRadioButton("Endless");
+    final JRadioButton          timedOption = new JRadioButton("Timed");
 
     public GameConfigurator() {
         super(new GridLayout(4, 2));

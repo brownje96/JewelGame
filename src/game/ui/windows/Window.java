@@ -7,6 +7,7 @@ import game.meta.Metadata;
 import game.ui.actions.AboutViewer;
 import game.ui.actions.GameConfigurator;
 import game.ui.actions.HelpViewer;
+import game.ui.actions.PauseButton;
 
 import javax.swing.*;
 import java.awt.*;
@@ -19,6 +20,7 @@ public class Window
     // menus
     final JMenu mnuFile = new JMenu("File"),
                 mnuHelp = new JMenu("Help"),
+                mnuPlay = new JMenu("PAUSE"),
                 mnuScore = new JMenu("0");
 
     // menu items for File
@@ -33,6 +35,7 @@ public class Window
     private JPanel boardPanel;
     private final JProgressBar timerBar = new JProgressBar();
 
+    // Threading
     private Thread timerThread;
 
     // game data
@@ -67,8 +70,15 @@ public class Window
         mnuHelp.add(itmAbout);
         itmAbout.addActionListener(new AboutViewer());
 
-        // Score Menu
+        // separator bar
         mnuBar.add(Box.createHorizontalGlue());
+
+        // Play/Pause Button
+        mnuBar.add(mnuPlay);
+        mnuPlay.addMenuListener(new PauseButton(mnuPlay));
+        mnuPlay.setEnabled(false);
+
+        // Score Menu
         mnuBar.add(mnuScore);
         mnuScore.setEnabled(false);
     }
@@ -85,6 +95,7 @@ public class Window
             timerThread = new Thread(new PlayTimer(timerBar, seconds), "Timed Game Thread");
             timerThread.start();
         }
+        mnuPlay.setEnabled(true);
     }
 
     public void updateBoard() {
@@ -106,6 +117,12 @@ public class Window
         for(int y = 0; y < myBoard.getGameSize().height; y++)
             for(int x = 0; x < myBoard.getGameSize().width; x++)
                 myBoard.getArray()[y][x].setEnabled(false);
+    }
+
+    public void unlockBoard() {
+        for(int y = 0; y < myBoard.getGameSize().height; y++)
+            for(int x = 0; x < myBoard.getGameSize().width; x++)
+                myBoard.getArray()[y][x].setEnabled(true);
     }
 
     public Board getGame() { return myBoard; }
